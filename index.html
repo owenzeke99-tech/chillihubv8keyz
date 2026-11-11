@@ -1,0 +1,624 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chilli Hub V8 Key</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --rainbow: linear-gradient(
+        90deg,
+        #ff287f, #ff9d43, #f9ed55,
+        #40efa5, #38bfff, #a45cff, #ff287f
+    );
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #080811;
+    color: white;
+    font-family: Inter, sans-serif;
+    perspective: 1000px;
+}
+
+/* Animated rainbow background */
+.background {
+    position: fixed;
+    inset: -50%;
+    background: conic-gradient(
+        #ff287f, #ff9d43, #f9ed55,
+        #40efa5, #38bfff, #a45cff, #ff287f
+    );
+    filter: blur(160px);
+    opacity: .16;
+    animation: bgRotate 25s linear infinite;
+}
+
+@keyframes bgRotate {
+    to { transform: rotate(360deg); }
+}
+
+/* Neon floating orbs */
+.orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(85px);
+    opacity: .5;
+    pointer-events: none;
+    animation: orbFloat 12s ease-in-out infinite alternate;
+}
+
+.orb1 {
+    width: 300px;
+    height: 300px;
+    background: #ff238f;
+    left: -100px;
+    top: -100px;
+}
+
+.orb2 {
+    width: 350px;
+    height: 350px;
+    background: #6245ff;
+    right: -100px;
+    bottom: -100px;
+    animation-delay: -4s;
+}
+
+.orb3 {
+    width: 220px;
+    height: 220px;
+    background: #00d9ff;
+    right: 20%;
+    top: 10%;
+    animation-delay: -7s;
+}
+
+.orb4 {
+    width: 200px;
+    height: 200px;
+    background: #ffb52c;
+    left: 20%;
+    bottom: 5%;
+    animation-delay: -2s;
+}
+
+@keyframes orbFloat {
+    0% { transform: translate(0,0) scale(.85); }
+    50% { transform: translate(70px,-65px) scale(1.25); }
+    100% { transform: translate(-45px,50px) scale(1); }
+}
+
+/* Particles */
+#particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 12px currentColor;
+    animation: particleFly linear infinite;
+}
+
+@keyframes particleFly {
+    0% {
+        transform: translateY(110vh) translateX(0) scale(0);
+        opacity: 0;
+    }
+    20% { opacity: 1; }
+    80% { opacity: .8; }
+    100% {
+        transform: translateY(-15vh) translateX(70px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Sparkles */
+.sparkle {
+    position: fixed;
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 15px 3px #a66cff;
+    animation: sparkle 2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes sparkle {
+    0%,100% { opacity: 0; transform: scale(.2) rotate(0); }
+    50% { opacity: 1; transform: scale(1.5) rotate(180deg); }
+}
+
+/* Main rainbow frame */
+.wrapper {
+    width: min(460px, 90%);
+    position: relative;
+    padding: 3px;
+    z-index: 2;
+    border-radius: 29px;
+    background: var(--rainbow);
+    background-size: 500% 500%;
+    animation: borderFlow 5s linear infinite, entrance 1.2s ease;
+    box-shadow:
+        0 0 30px rgba(170,90,255,.35),
+        0 0 80px rgba(255,60,170,.17),
+        0 0 130px rgba(50,190,255,.1);
+}
+
+@keyframes borderFlow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 500% 50%; }
+}
+
+@keyframes entrance {
+    from { opacity: 0; transform: translateY(60px) scale(.9) rotateX(10deg); }
+    to { opacity: 1; transform: translateY(0) scale(1) rotateX(0); }
+}
+
+/* Inner glass menu */
+.container {
+    position: relative;
+    overflow: hidden;
+    padding: 43px 30px 32px;
+    border-radius: 26px;
+    background: rgba(13,13,27,.72);
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
+    text-align: center;
+    isolation: isolate;
+}
+
+/* Moving rainbow light */
+.container::before {
+    content: "";
+    position: absolute;
+    inset: -100%;
+    z-index: -1;
+    background: conic-gradient(
+        transparent 0deg,
+        rgba(255,50,150,.15) 60deg,
+        rgba(50,180,255,.15) 130deg,
+        transparent 200deg,
+        rgba(170,80,255,.15) 280deg,
+        transparent 360deg
+    );
+    animation: innerRotate 14s linear infinite;
+}
+
+@keyframes innerRotate {
+    to { transform: rotate(360deg); }
+}
+
+/* Moving glass reflection */
+.container::after {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    top: 0;
+    left: -200%;
+    background: linear-gradient(
+        110deg,
+        transparent 35%,
+        rgba(255,255,255,.045) 50%,
+        transparent 65%
+    );
+    animation: glassShine 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes glassShine {
+    0%, 20% { left: -200%; }
+    70%, 100% { left: 200%; }
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Title */
+h1 {
+    font-family: Orbitron, sans-serif;
+    font-size: clamp(23px,6vw,30px);
+    font-weight: 900;
+    line-height: 1.5;
+    background: var(--rainbow);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textFlow 4s linear infinite;
+    filter: drop-shadow(0 0 15px rgba(155,100,255,.5));
+}
+
+@keyframes textFlow {
+    to { background-position: 400% 50%; }
+}
+
+.subtitle {
+    margin-top: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: rgba(255,255,255,.5);
+    animation: subtitleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes subtitleGlow {
+    to { color: white; text-shadow: 0 0 15px #a66cff; }
+}
+
+/* Divider */
+.divider {
+    height: 2px;
+    margin: 30px 0;
+    border-radius: 5px;
+    background: var(--rainbow);
+    background-size: 400%;
+    animation: borderFlow 4s linear infinite;
+    box-shadow: 0 0 15px rgba(150,100,255,.5);
+}
+
+/* Key panel */
+.key-panel {
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    padding: 21px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.045);
+    border: 1px solid rgba(255,255,255,.15);
+    transition: .4s ease;
+}
+
+.key-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.055),
+        transparent
+    );
+    transform: translateX(-100%);
+    animation: panelShine 6s ease-in-out infinite;
+}
+
+@keyframes panelShine {
+    0%, 35% { transform: translateX(-100%); }
+    70%, 100% { transform: translateX(100%); }
+}
+
+.key-panel:hover {
+    transform: translateY(-5px);
+    border-color: #a98aff;
+    box-shadow: 0 0 30px rgba(130,100,255,.22);
+}
+
+.label {
+    position: relative;
+    font-size: 11px;
+    color: rgba(255,255,255,.6);
+    letter-spacing: 2px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.key-display {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 65px;
+    padding: 14px;
+    border-radius: 12px;
+    background: rgba(0,0,0,.32);
+    border: 1px solid rgba(255,255,255,.1);
+    transition: .3s;
+}
+
+.key-display:hover {
+    border-color: rgba(180,130,255,.65);
+    box-shadow: 0 0 18px rgba(130,100,255,.15);
+}
+
+#key {
+    width: 100%;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+    text-shadow: 0 0 12px rgba(155,130,255,.5);
+}
+
+/* Copy button */
+.copy-btn {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    margin-top: 19px;
+    padding: 17px;
+    border: 0;
+    border-radius: 13px;
+    cursor: pointer;
+    color: white;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: var(--rainbow);
+    background-size: 400% 400%;
+    animation: borderFlow 4s linear infinite;
+    box-shadow: 0 5px 30px rgba(125,90,255,.25);
+    transition: .3s;
+}
+
+.copy-btn::before {
+    content: "";
+    position: absolute;
+    width: 55px;
+    height: 200%;
+    top: -50%;
+    left: -100px;
+    background: rgba(255,255,255,.45);
+    transform: rotate(25deg);
+    transition: .6s;
+}
+
+.copy-btn:hover::before { left: 120%; }
+
+.copy-btn:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 45px rgba(150,100,255,.5);
+}
+
+.copy-btn:active { transform: scale(.96); }
+
+/* Status */
+.status {
+    margin-top: 23px;
+    color: rgba(255,255,255,.5);
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.status span {
+    color: #55ffb4;
+    text-shadow: 0 0 15px #55ffb4;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: .3; }
+}
+
+.footer {
+    margin-top: 28px;
+    color: rgba(255,255,255,.3);
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+/* Ripple circles */
+.ripple {
+    position: fixed;
+    border: 1px solid rgba(180,130,255,.5);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    pointer-events: none;
+    animation: ripple 3s ease-out infinite;
+}
+
+@keyframes ripple {
+    0% { transform: scale(.2); opacity: .7; }
+    100% { transform: scale(5); opacity: 0; }
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translate(-50%,-100px);
+    opacity: 0;
+    z-index: 10;
+    padding: 14px 23px;
+    border-radius: 13px;
+    background: rgba(20,20,35,.9);
+    border: 1px solid rgba(150,120,255,.7);
+    backdrop-filter: blur(15px);
+    color: white;
+    font-size: 12px;
+    transition: .4s;
+    white-space: nowrap;
+    box-shadow: 0 0 30px rgba(125,90,255,.3);
+}
+
+.toast.show {
+    transform: translate(-50%,0);
+    opacity: 1;
+}
+
+@media(max-width:420px) {
+    .container { padding: 35px 20px 27px; }
+    .key-panel { padding: 16px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    *,*::before,*::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+<div class="orb orb4"></div>
+
+<div id="particles"></div>
+<div id="sparkles"></div>
+<div id="ripples"></div>
+
+<div class="toast" id="toast">✓ KEY COPIED SUCCESSFULLY!</div>
+
+<div class="wrapper">
+    <main class="container">
+        <div class="content">
+
+            <h1>Chilli Hub V8 Key</h1>
+            <p class="subtitle">RAINBOW KEY SYSTEM</p>
+
+            <div class="divider"></div>
+
+            <section class="key-panel">
+                <p class="label">✦ YOUR ACCESS KEY</p>
+
+                <div class="key-display">
+                    <div id="key">
+                        ChilliHubV8KeyOsiwiwi - KaowowjjwOwowojeej
+                    </div>
+                </div>
+
+                <button class="copy-btn" onclick="copyKey()">
+                    ✧ COPY KEY ✧
+                </button>
+            </section>
+
+            <p class="status">
+                <span>●</span> SYSTEM ONLINE
+            </p>
+
+            <div class="footer">
+                CHILLI HUB V8 • KEY SYSTEM
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<script>
+const KEY_VALUE =
+"ChilliHubV8KeyOsiwiwi - KaowowjjwOwowojeej";
+
+async function copyKey() {
+    try {
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(KEY_VALUE);
+        } else {
+            const area = document.createElement("textarea");
+            area.value = KEY_VALUE;
+            area.style.position = "fixed";
+            area.style.opacity = "0";
+            document.body.appendChild(area);
+            area.select();
+            const success = document.execCommand("copy");
+            area.remove();
+            if (!success) throw new Error("Copy failed");
+        }
+        showToast("✓ KEY COPIED SUCCESSFULLY!");
+    } catch (error) {
+        showToast("COPY FAILED - PLEASE COPY MANUALLY");
+    }
+}
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(window.toastTimer);
+    window.toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2500);
+}
+
+// Rainbow particles
+const particleArea = document.getElementById("particles");
+const colors = [
+    "#ff3d8d", "#ffb347", "#f9ed55",
+    "#42f5a1", "#43c5ff", "#ae7aff"
+];
+
+for (let i = 0; i < 90; i++) {
+    const p = document.createElement("div");
+    p.className = "particle";
+    const color = colors[i % colors.length];
+    p.style.background = color;
+    p.style.color = color;
+    p.style.left = Math.random() * 100 + "%";
+    p.style.width = (2 + Math.random() * 4) + "px";
+    p.style.height = p.style.width;
+    p.style.animationDelay = Math.random() * 15 + "s";
+    p.style.animationDuration = (7 + Math.random() * 12) + "s";
+    particleArea.appendChild(p);
+}
+
+// Sparkle effects
+const sparkleArea = document.getElementById("sparkles");
+
+for (let i = 0; i < 24; i++) {
+    const s = document.createElement("div");
+    s.className = "sparkle";
+    s.style.left = Math.random() * 100 + "%";
+    s.style.top = Math.random() * 100 + "%";
+    s.style.animationDelay = Math.random() * 4 + "s";
+    sparkleArea.appendChild(s);
+}
+
+// Expanding neon rings
+const rippleArea = document.getElementById("ripples");
+
+for (let i = 0; i < 5; i++) {
+    const r = document.createElement("div");
+    r.className = "ripple";
+    r.style.left = (10 + Math.random() * 80) + "%";
+    r.style.top = (10 + Math.random() * 80) + "%";
+    r.style.animationDelay = (i * .6) + "s";
+    rippleArea.appendChild(r);
+}
+
+// Subtle mouse movement on desktop
+document.addEventListener("mousemove", (e) => {
+    if (window.innerWidth < 700) return;
+
+    const x = (e.clientX / window.innerWidth - .5) * 8;
+    const y = (e.clientY / window.innerHeight - .5) * 8;
+
+    const wrapper = document.querySelector(".wrapper");
+    wrapper.style.transform =
+        `translate(${x}px, ${y}px)`;
+});
+
+document.addEventListener("mouseleave", () => {
+    document.querySelector(".wrapper").style.transform = "";
+});
+</script>
+
+</body>
+</html>
